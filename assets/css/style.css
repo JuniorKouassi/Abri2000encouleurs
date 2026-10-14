@@ -1,3 +1,10 @@
+@font-face{font-family:"Kaushan Script";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/kaushan-script-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Poppins";font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/poppins-400i-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/poppins-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/poppins-500-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/poppins-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/poppins-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:800;font-display:swap;src:url(../fonts/poppins-800-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:"Lilita One";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/lilita-one-latin.woff2) format("woff2")}
 
 /* Concept : une affiche Holi. Nuages de poudre qui débordent d'une section à l'autre,
@@ -30,9 +37,9 @@ p{margin:0}
 
 /* nuages de poudre */
 .poudre{position:absolute;pointer-events:none;z-index:0;width:var(--t,520px);aspect-ratio:1;background:center/contain no-repeat;opacity:var(--o,.95)}
-.p-violet{background-image:url(../img/poudre-violet.webp)} .p-orange{background-image:url(../img/poudre-orange.webp)}
-.p-rose{background-image:url(../img/poudre-rose.webp)} .p-bleu{background-image:url(../img/poudre-bleu.webp)}
-.p-jaune{background-image:url(../img/poudre-jaune.webp)} .p-vert{background-image:url(../img/poudre-vert.webp)}
+.p-violet{background-image:url(../img/poudre-violet.webp);background-image:image-set(url(../img/poudre-violet.avif) type("image/avif"),url(../img/poudre-violet.webp) type("image/webp"))} .p-orange{background-image:url(../img/poudre-orange.webp);background-image:image-set(url(../img/poudre-orange.avif) type("image/avif"),url(../img/poudre-orange.webp) type("image/webp"))}
+.p-rose{background-image:url(../img/poudre-rose.webp);background-image:image-set(url(../img/poudre-rose.avif) type("image/avif"),url(../img/poudre-rose.webp) type("image/webp"))} .p-bleu{background-image:url(../img/poudre-bleu.webp);background-image:image-set(url(../img/poudre-bleu.avif) type("image/avif"),url(../img/poudre-bleu.webp) type("image/webp"))}
+.p-jaune{background-image:url(../img/poudre-jaune.webp);background-image:image-set(url(../img/poudre-jaune.avif) type("image/avif"),url(../img/poudre-jaune.webp) type("image/webp"))} .p-vert{background-image:url(../img/poudre-vert.webp);background-image:image-set(url(../img/poudre-vert.avif) type("image/avif"),url(../img/poudre-vert.webp) type("image/webp"))}
 
 /* titres autocollant */
 .autocollant{color:var(--orange);-webkit-text-stroke:.16em #fff;paint-order:stroke fill;text-shadow:0 .06em 0 rgba(42,14,87,.18),0 .12em .25em rgba(42,14,87,.18)}

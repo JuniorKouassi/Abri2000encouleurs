@@ -4,6 +4,8 @@ Site d'une page du festival (25 et 26 décembre 2026, Cité Abri 2000, Koumassi)
 
 En ligne : https://abri2000encouleurs.kouassij019.workers.dev
 
+Les polices (Lilita One, Poppins, Kaushan Script) sont hébergées dans `assets/fonts/`, sans appel à Google Fonts.
+
 Pour voir le site en local : `npx serve .` puis ouvrir http://localhost:3000.
 
 Pour le développer avec Claude Code : ouvrir ce dossier dans Claude Code, le brief est dans `CLAUDE.md`.
