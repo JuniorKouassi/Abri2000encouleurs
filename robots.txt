@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abri2000encouleurs.kouassij019.workers.dev/sitemap.xml
