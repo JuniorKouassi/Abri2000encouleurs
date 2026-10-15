@@ -276,3 +276,6 @@ section{position:relative}
   .bandeau .piste{animation:none}
   .bouton,.activite,.mur figure{transition:none}
 }
+
+/* vidéo de l'ouverture : toute la largeur du cadre, proportions d'origine, sans rognage */
+.tirage .video-tirage{width:100%;height:auto;aspect-ratio:626/360;object-fit:cover}

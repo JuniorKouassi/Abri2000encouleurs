@@ -31,4 +31,6 @@ Remplacer `abri2000encouleurs.kouassij019.workers.dev` dans `index.html` (canoni
 ## Vidéo de l'ouverture
 
 `assets/video/festival-ambiance.mp4` : les 20 premières secondes de la vidéo source, sans le son, jouées en boucle dans le cadre de la photo principale.
+Après une modification de `style.css` ou `main.js`, changer le numéro `?v=` dans `index.html` pour que les navigateurs prennent la nouvelle version.
+
 `src/worker.js` sert uniquement les vidéos, pour répondre aux requêtes partielles (Range) exigées par Safari et l'iPhone. Tout le reste est servi directement par Cloudflare.
