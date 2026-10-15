@@ -27,3 +27,8 @@ En ajoutant une photo, générer les mêmes variantes et la même balise `<pictu
 ## Quand le nom de domaine sera connu
 
 Remplacer `abri2000encouleurs.kouassij019.workers.dev` dans `index.html` (canonical, Open Graph, JSON-LD), `robots.txt` et `sitemap.xml`.
+
+## Vidéo de l'ouverture
+
+`assets/video/festival-ambiance.mp4` : les 20 premières secondes de la vidéo source, sans le son, jouées en boucle dans le cadre de la photo principale.
+`src/worker.js` sert uniquement les vidéos, pour répondre aux requêtes partielles (Range) exigées par Safari et l'iPhone. Tout le reste est servi directement par Cloudflare.
