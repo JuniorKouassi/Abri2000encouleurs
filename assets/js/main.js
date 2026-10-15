@@ -17,6 +17,20 @@
   var vid = document.querySelector('.video-tirage');
   if(vid && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ vid.removeAttribute('autoplay'); vid.pause(); }
 
+  // Menu hamburger
+  var burger = document.getElementById('menu-burger'), menu = document.getElementById('menu-mobile');
+  if(burger && menu){
+    var ferme = function(){ menu.hidden = true; burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Ouvrir le menu'); };
+    burger.addEventListener('click', function(){
+      var ouvre = menu.hidden; menu.hidden = !ouvre;
+      burger.setAttribute('aria-expanded', String(ouvre)); burger.setAttribute('aria-label', ouvre ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    menu.addEventListener('click', function(e){ if(e.target.closest('a')) ferme(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !menu.hidden){ ferme(); burger.focus(); } });
+    document.addEventListener('click', function(e){ if(!menu.hidden && !e.target.closest('.nav')) ferme(); });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', function(e){ if(e.matches) ferme(); });
+  }
+
   // Filtres de la galerie
   var boutons = document.querySelectorAll('.filtres button');
   var photos = Array.prototype.slice.call(document.querySelectorAll('#mur figure'));

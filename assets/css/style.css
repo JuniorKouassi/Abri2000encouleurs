@@ -378,3 +378,39 @@ html.resa-ouverte{overflow:hidden}
 .appel-boutons{display:flex;flex-wrap:wrap;gap:12px}
 .pied-droite{display:grid;gap:14px;justify-items:end}
 @media (max-width:820px){.pied-droite{justify-items:start}}
+
+/* menu hamburger (téléphone et tablette) */
+.menu-burger{display:none;flex-shrink:0;width:42px;height:42px;border-radius:50%;border:2px solid var(--trait);background:#fff;cursor:pointer;padding:0;position:relative;color:var(--violet-profond)}
+.menu-burger span{position:absolute;left:11px;right:11px;height:2.5px;border-radius:2px;background:currentColor;transition:transform .25s,opacity .2s,top .25s}
+.menu-burger span:nth-child(1){top:12px}
+.menu-burger span:nth-child(2){top:18px}
+.menu-burger span:nth-child(3){top:24px}
+.menu-burger[aria-expanded="true"] span:nth-child(1){top:18px;transform:rotate(45deg)}
+.menu-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-burger[aria-expanded="true"] span:nth-child(3){top:18px;transform:rotate(-45deg)}
+.menu-mobile{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--trait);box-shadow:0 24px 40px -24px rgba(42,14,87,.5);padding:8px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px));display:grid;animation:menu-entre .22s ease}
+.menu-mobile a{text-decoration:none;font-weight:600;font-size:1.05rem;color:var(--encre);padding:14px 4px;border-bottom:1px solid var(--trait)}
+.menu-mobile a:last-child{border-bottom:0}
+.menu-mobile a:hover,.menu-mobile a:focus-visible{color:var(--violet)}
+@keyframes menu-entre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (max-width:900px){
+  .menu-burger{display:block}
+  .nav .enveloppe{gap:10px}
+}
+@media (min-width:901px){.menu-mobile{display:none}}
+@media (max-width:380px){
+  .marque span{font-size:.86rem}
+  .marque img{width:34px;height:34px}
+  .nav .bouton{padding:8px 10px;font-size:.74rem}
+  .menu-burger{width:38px;height:38px}
+  .menu-burger span{left:9px;right:9px}
+  .menu-burger span:nth-child(1){top:10px}.menu-burger span:nth-child(2){top:16px}.menu-burger span:nth-child(3){top:22px}
+  .menu-burger[aria-expanded="true"] span:nth-child(1),.menu-burger[aria-expanded="true"] span:nth-child(3){top:16px}
+}
+@media (prefers-reduced-motion:reduce){.menu-mobile{animation:none}.menu-burger span{transition:none}}
+@media (max-width:340px){
+  .marque span{font-size:.74rem}
+  .nav .enveloppe{gap:8px}
+  .nav .bouton{padding:7px 9px;font-size:.72rem}
+  .b-reserver .point{display:none}
+}
