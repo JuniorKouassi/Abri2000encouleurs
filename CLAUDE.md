@@ -61,7 +61,7 @@ Règles de rédaction : pas de tirets cadratins dans les textes, utiliser des vi
 
 - **Dates** : vendredi 25 et samedi 26 décembre 2026
 - **Lieu** : Koumassi, Sci Lagune, Cité Abri2000 (147 logements)
-- **Google Maps** : https://maps.app.goo.gl/tJkV2QFrzSHkCKK46?g_st=ac
+- **Google Maps** : https://maps.app.goo.gl/ezuLBU18LiKTqTJx5?g_st=atm
 - **WhatsApp (bouton « Écrivez-nous »)** : +225 07 47 77 84 53, lien `https://wa.me/2250747778453`
 - **Infoline** : 01 42 75 64 03 / 07 49 43 41 29 / 07 08 47 95 43
 - **Président de 147 Event** : Bléhiri Martin, 07 47 77 84 53 / 07 09 30 84 26
