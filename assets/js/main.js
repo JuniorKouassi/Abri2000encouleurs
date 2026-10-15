@@ -13,6 +13,10 @@
   }
   maj(); setInterval(maj, 1000);
 
+  // Vidéo de l'ouverture : figée sur son image si l'utilisateur limite les animations
+  var vid = document.querySelector('.video-tirage');
+  if(vid && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ vid.removeAttribute('autoplay'); vid.pause(); }
+
   // Filtres de la galerie
   var boutons = document.querySelectorAll('.filtres button');
   var photos = Array.prototype.slice.call(document.querySelectorAll('#mur figure'));

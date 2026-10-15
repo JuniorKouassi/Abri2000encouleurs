@@ -24,7 +24,7 @@
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--texte);font-size:16px;line-height:1.65;overflow-x:hidden}
-img{max-width:100%;display:block}
+img,video{max-width:100%;display:block}
 picture{display:contents}
 a{color:inherit}
 h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.02;margin:0;text-wrap:balance;letter-spacing:.01em}
@@ -92,10 +92,10 @@ p{margin:0}
 
 .tirages{position:relative;min-height:470px}
 .tirage{position:absolute;background:#fff;padding:10px 10px 12px;border-radius:6px;box-shadow:0 22px 48px -20px rgba(42,14,87,.55),0 2px 6px rgba(42,14,87,.12)}
-.tirage img{border-radius:3px;width:100%;height:100%;object-fit:cover}
+.tirage img,.tirage video{border-radius:3px;width:100%;height:100%;object-fit:cover}
 .tirage figcaption{font-family:var(--script);font-size:1rem;color:var(--violet);text-align:center;margin-top:6px;line-height:1.2}
 .t1{width:78%;height:300px;top:10px;right:0;transform:rotate(3deg)}
-.t1 img{height:248px}
+.t1 img,.t1 video{height:248px}
 .t2{width:52%;height:230px;bottom:0;left:0;transform:rotate(-5deg)}
 .t2 img{height:178px}
 .t3{width:44%;bottom:30px;right:4%;transform:rotate(4deg);padding:14px;display:grid;place-items:center}
@@ -104,7 +104,7 @@ p{margin:0}
   .ouverture .enveloppe{grid-template-columns:1fr}
   .tirages{min-height:400px;max-width:560px;width:100%;margin-inline:auto}
 }
-@media (max-width:480px){.tirages{min-height:330px}.t1{height:220px}.t1 img{height:170px}.t2{height:180px}.t2 img{height:128px}}
+@media (max-width:480px){.tirages{min-height:330px}.t1{height:220px}.t1 img,.t1 video{height:170px}.t2{height:180px}.t2 img{height:128px}}
 
 /* compte à rebours */
 .rebours{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:22px;font-size:.9rem;color:var(--encre)}
