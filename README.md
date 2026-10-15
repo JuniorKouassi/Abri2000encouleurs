@@ -41,6 +41,6 @@ Le bouton « Réserver » (barre du haut, ouverture, section Partenaires, pied d
 
 - Les demandes arrivent sur `POST /api/reservations` (`src/reservations.js`) et sont enregistrées dans la base D1 `abri2000-reservations` (schéma dans `migrations/`).
 - Page privée de l'équipe : `/equipe/`, protégée par le mot de passe `MOT_DE_PASSE_EQUIPE`. Compteurs par jour, listes, suivi des stands et partenaires, export Excel (`src/equipe.js`).
-- Mail à infos.147event@gmail.com à chaque demande, seulement si le secret `RESEND_API_KEY` est défini (compte Resend). Sans clé, les demandes sont quand même enregistrées.
-- Secrets Cloudflare : `MOT_DE_PASSE_EQUIPE`, `CLE_SESSION`, `RESEND_API_KEY`, à définir avec `npx wrangler secret put NOM_DU_SECRET`. En local, les mettre dans `.dev.vars` (non versionné).
+- Mail à l'équipe (info147event@gmail.com) à chaque demande, envoyé par Cloudflare Email Service depuis reservations@abri2000encouleurs.org (binding `EMAIL` dans `wrangler.jsonc`). L'adresse info147event@abri2000encouleurs.org est transférée vers ce Gmail par Email Routing.
+- Secrets Cloudflare : `MOT_DE_PASSE_EQUIPE`, `CLE_SESSION`, à définir avec `npx wrangler secret put NOM_DU_SECRET`. En local, les mettre dans `.dev.vars` (non versionné).
 - Nouvelle migration : `npx wrangler d1 migrations apply abri2000-reservations --remote`.

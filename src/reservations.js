@@ -103,26 +103,22 @@ export function lignes(r) {
 const echapper = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
 async function envoyerMail(env, r) {
-  if (!env.RESEND_API_KEY) return;
+  if (!env.EMAIL || !env.MAIL_EQUIPE) return;
   const l = lignes(r);
   const sujet = `Réservation : ${TITRES[r.type]}, ${r.nom}` + (r.type === 'public' ? ` (${r.places} place${r.places > 1 ? 's' : ''})` : '');
   const html = `<h2 style="font-family:Arial,sans-serif;color:#43197F">Nouvelle demande sur le site du festival</h2>
 <table style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">${l.map(([k, v]) =>
     `<tr><td style="padding:6px 14px 6px 0;color:#5B4D72">${echapper(k)}</td><td style="padding:6px 0;font-weight:bold">${echapper(v)}</td></tr>`).join('')}</table>
 <p style="font-family:Arial,sans-serif;font-size:13px;color:#5B4D72">Toutes les demandes : page de l'équipe, /equipe/ sur le site.</p>`;
-  const rep = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: env.MAIL_EXPEDITEUR || 'Festival Abri2000 <onboarding@resend.dev>',
-      to: [env.MAIL_EQUIPE],
-      reply_to: r.email || undefined,
-      subject: sujet,
-      html,
-      text: l.map(([k, v]) => `${k} : ${v}`).join('\n'),
-    }),
+  // Envoi par Cloudflare Email Service, depuis une adresse du domaine du site
+  await env.EMAIL.send({
+    from: { email: 'reservations@abri2000encouleurs.org', name: 'Festival Abri2000 en Couleurs' },
+    to: env.MAIL_EQUIPE,
+    replyTo: r.email || undefined,
+    subject: sujet,
+    html,
+    text: l.map(([k, v]) => `${k} : ${v}`).join('\n'),
   });
-  if (!rep.ok) console.error('resend', rep.status, await rep.text());
 }
 
 export function json(donnees, status = 200, entetes = {}) {

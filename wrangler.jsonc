@@ -21,8 +21,12 @@
       "migrations_dir": "migrations"
     }
   ],
+  // Mails de réservation : envoyés depuis reservations@abri2000encouleurs.org vers l'adresse de l'équipe
+  "send_email": [
+    { "name": "EMAIL", "allowed_destination_addresses": ["info147event@gmail.com"] }
+  ],
   "vars": {
-    "MAIL_EQUIPE": "infos.147event@gmail.com"
+    "MAIL_EQUIPE": "info147event@gmail.com"
   }
-  // Secrets (npx wrangler secret put …) : MOT_DE_PASSE_EQUIPE, CLE_SESSION, RESEND_API_KEY (facultatif)
+  // Secrets (npx wrangler secret put …) : MOT_DE_PASSE_EQUIPE, CLE_SESSION
 }
