@@ -33,4 +33,14 @@ Remplacer `abri2000encouleurs.kouassij019.workers.dev` dans `index.html` (canoni
 `assets/video/festival-ambiance.mp4` : les 20 premières secondes de la vidéo source, sans le son, jouées en boucle dans le cadre de la photo principale.
 Après une modification de `style.css` ou `main.js`, changer le numéro `?v=` dans `index.html` pour que les navigateurs prennent la nouvelle version.
 
-`src/worker.js` sert uniquement les vidéos, pour répondre aux requêtes partielles (Range) exigées par Safari et l'iPhone. Tout le reste est servi directement par Cloudflare.
+`src/video.js` répond aux requêtes partielles (Range) sur les vidéos, exigées par Safari et l'iPhone. Les autres fichiers sont servis directement par Cloudflare.
+
+## Réservations
+
+Le bouton « Réserver » (barre du haut, ouverture, section Partenaires, pied de page) ouvre la fenêtre de `assets/js/reservation.js` : place dans le public (gratuite, sert à compter les personnes attendues), stand, ou partenariat.
+
+- Les demandes arrivent sur `POST /api/reservations` (`src/reservations.js`) et sont enregistrées dans la base D1 `abri2000-reservations` (schéma dans `migrations/`).
+- Page privée de l'équipe : `/equipe/`, protégée par le mot de passe `MOT_DE_PASSE_EQUIPE`. Compteurs par jour, listes, suivi des stands et partenaires, export Excel (`src/equipe.js`).
+- Mail à infos.147event@gmail.com à chaque demande, seulement si le secret `RESEND_API_KEY` est défini (compte Resend). Sans clé, les demandes sont quand même enregistrées.
+- Secrets Cloudflare : `MOT_DE_PASSE_EQUIPE`, `CLE_SESSION`, `RESEND_API_KEY`, à définir avec `npx wrangler secret put NOM_DU_SECRET`. En local, les mettre dans `.dev.vars` (non versionné).
+- Nouvelle migration : `npx wrangler d1 migrations apply abri2000-reservations --remote`.

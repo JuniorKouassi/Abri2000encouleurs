@@ -10,3 +10,5 @@ wrangler.jsonc
 .gitignore
 
 src
+migrations
+.dev.vars

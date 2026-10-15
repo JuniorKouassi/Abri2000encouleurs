@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Réservations | Équipe 147 Event</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="stylesheet" href="/assets/css/style.css?v=20261016">
+<style>
+body{background:var(--voile)}
+.eq{width:min(1180px,100%);margin-inline:auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+#tableau-bord{display:grid;gap:18px;min-width:0}
+.eq-barre{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.eq-barre img{width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(42,14,87,.18)}
+.eq-titre{display:grid;line-height:1.25;margin-right:auto}
+.eq-titre b{font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--violet-profond)}
+.eq-titre span{font-size:.82rem;color:var(--encre-douce)}
+.eq-barre .bouton{padding:9px 18px;font-size:.88rem}
+.eq-sortir{border:0;background:none;font:inherit;font-weight:600;color:var(--encre-douce);cursor:pointer;padding:9px 6px}
+.tuiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tuile-chiffre{border-radius:16px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));display:grid;gap:2px;box-shadow:0 16px 34px -22px rgba(42,14,87,.7)}
+.tuile-chiffre b{font-family:var(--display);font-weight:400;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.tuile-chiffre span{font-size:.82rem;font-weight:600}
+.eq-note{font-size:.8rem;color:var(--encre-douce);margin-top:-8px}
+.eq-carte{background:#fff;border:1px solid var(--trait);border-radius:18px;box-shadow:0 20px 50px -34px rgba(42,14,87,.5);padding:6px 18px 12px;min-width:0}
+.onglets{display:flex;gap:6px;border-bottom:2px solid var(--trait);overflow-x:auto}
+.onglets button{border:0;background:none;font:inherit;padding:12px 14px;font-weight:700;color:var(--encre-douce);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.onglets button[aria-selected="true"]{color:var(--violet-profond);border-bottom-color:var(--rose)}
+.onglets small{font-weight:600;background:var(--voile);border-radius:999px;padding:1px 8px;margin-left:4px}
+.tableau{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:720px}
+th{text-align:left;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-douce);padding:10px;border-bottom:1px solid var(--trait);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--trait);vertical-align:top}
+td.nb,th.nb{text-align:right;font-variant-numeric:tabular-nums}
+td.nb{font-weight:700}
+td a{color:var(--violet);font-weight:600;text-decoration:none;white-space:nowrap}
+tr:hover td{background:var(--voile)}
+.etat{border:1px solid var(--trait);border-radius:999px;padding:4px 8px;font:inherit;font-size:.8rem;font-weight:600;background:#fff;color:var(--violet-profond);cursor:pointer}
+.vide{padding:28px 10px;text-align:center;color:var(--encre-douce)}
+.connexion{max-width:400px;margin:10vh auto 0;background:#fff;border:1px solid var(--trait);border-radius:22px;padding:28px 24px;display:grid;gap:16px;box-shadow:0 30px 60px -36px rgba(42,14,87,.6)}
+.connexion h1{font-size:1.7rem;color:var(--violet-profond)}
+.connexion p{color:var(--encre-douce);font-size:.9rem}
+.connexion label{font-weight:600;font-size:.86rem}
+.connexion input{width:100%;font:inherit;font-size:16px;border:2px solid var(--trait);border-radius:12px;padding:11px 14px;margin-top:6px}
+.connexion input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px rgba(106,44,168,.12)}
+.connexion .bouton{justify-content:center}
+.message{font-size:.86rem;font-weight:600;color:#A3123F}
+@media (max-width:820px){.tuiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<main class="eq">
+  <form class="connexion" id="connexion" hidden>
+    <h1>Espace équipe</h1>
+    <p>Réservations du Festival Abri2000 en Couleurs 3. Accès réservé à 147 Event.</p>
+    <label for="mdp">Mot de passe<input id="mdp" type="password" autocomplete="current-password" required></label>
+    <p class="message" id="message-connexion" role="alert" hidden></p>
+    <button class="bouton b-chaud" type="submit">Se connecter</button>
+  </form>
+
+  <div id="tableau-bord" hidden>
+    <div class="eq-barre">
+      <img src="/assets/img/logo-147event-128.webp" alt="" width="44" height="44">
+      <div class="eq-titre"><b>Réservations</b><span id="maj">Festival Abri2000 en Couleurs 3</span></div>
+      <a class="bouton b-clair" href="/api/equipe/export">Exporter en Excel</a>
+      <button class="eq-sortir" type="button" id="sortir">Se déconnecter</button>
+    </div>
+    <div class="tuiles" id="tuiles"></div>
+    <p class="eq-note">Une réservation « les deux jours » compte pour le vendredi et pour le samedi.</p>
+    <div class="eq-carte">
+      <div class="onglets" role="tablist" id="onglets"></div>
+      <div class="tableau"><table id="table"></table></div>
+    </div>
+  </div>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script>
+(function(){
+  var connexion = document.getElementById('connexion'), bord = document.getElementById('tableau-bord'), donnees = null, onglet = 'public';
+  var SUIVIS = ['Nouveau','Rappelé','Validé','Refusé'];
+  var ONGLETS = {public:'Public', stand:'Stands', partenaire:'Partenaires'};
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function date(iso){ return new Date(iso).toLocaleString('fr-FR', {timeZone:'Africa/Abidjan', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}); }
+  function wa(tel){ return '<a href="https://wa.me/225'+esc(tel)+'" target="_blank" rel="noopener">+225 '+esc(tel.replace(/(\d{2})(?=\d)/g, '$1 '))+'</a>'; }
+  var t = document.getElementById('toast'), tt;
+  function toast(m){ t.textContent = m; t.hidden = false; clearTimeout(tt); tt = setTimeout(function(){ t.hidden = true; }, 2200); }
+
+  var COLONNES = {
+    public:[['Reçue le',function(r){return date(r.cree_le)}],['Nom',function(r){return esc(r.nom)}],['Sexe',function(r){return r.sexe}],['WhatsApp',function(r){return wa(r.tel)}],['Jour',function(r){return r.jours}],['Places',function(r){return r.places},'nb'],['Connu par',function(r){return esc(r.details.source.join(', '))}]],
+    stand:[['Reçue le',function(r){return date(r.cree_le)}],['Nom',function(r){return esc(r.nom)}],['WhatsApp',function(r){return wa(r.tel)}],['Stand',function(r){return esc(r.details.enseigne)}],['Pour',function(r){return r.details.but}],['Articles',function(r){return esc(r.details.articles)+(r.details.categories.length?'<br><small>'+esc(r.details.categories.join(', '))+'</small>':'')}],['Jours',function(r){return r.jours}],['Électricité',function(r){return r.details.courant}],['Suivi',null]],
+    partenaire:[['Reçue le',function(r){return date(r.cree_le)}],['Nom',function(r){return esc(r.nom)+(r.email?'<br><small>'+esc(r.email)+'</small>':'')}],['WhatsApp',function(r){return wa(r.tel)}],['Structure',function(r){return esc(r.details.structure)+(r.details.fonction?'<br><small>'+esc(r.details.fonction)+'</small>':'')}],['Partenariat',function(r){return esc(r.details.nature.join(', '))}],['Proposition',function(r){return esc(r.details.message)}],['Suivi',null]]
+  };
+
+  function rend(){
+    var tt = donnees.totaux, l = donnees.reservations;
+    document.getElementById('tuiles').innerHTML = [
+      [tt.vendredi,'personnes attendues le vendredi 25','var(--orange)','var(--rose)'],
+      [tt.samedi,'personnes attendues le samedi 26','var(--violet)','var(--rose)'],
+      [tt.stands,'demandes de stand','#4E9A2A','var(--bleu)'],
+      [tt.partenaires,'propositions de partenariat','var(--bleu)','var(--violet)']
+    ].map(function(x){ return '<div class="tuile-chiffre" style="--c1:'+x[2]+';--c2:'+x[3]+'"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'; }).join('');
+    document.getElementById('onglets').innerHTML = Object.keys(ONGLETS).map(function(k){
+      return '<button type="button" role="tab" data-onglet="'+k+'" aria-selected="'+(k===onglet)+'">'+ONGLETS[k]+'<small>'+l.filter(function(r){return r.type===k}).length+'</small></button>'; }).join('');
+    var lignes = l.filter(function(r){ return r.type === onglet; }), cols = COLONNES[onglet];
+    document.getElementById('table').innerHTML = '<thead><tr>'+cols.map(function(c){ return '<th'+(c[2]?' class="nb"':'')+'>'+c[0]+'</th>'; }).join('')+'</tr></thead><tbody>'+
+      (lignes.length ? lignes.map(function(r){ return '<tr>'+cols.map(function(c){
+        if(!c[1]) return '<td><select class="etat" data-id="'+r.id+'" aria-label="Suivi de la demande de '+esc(r.nom)+'">'+SUIVIS.map(function(o){ return '<option'+(o===r.suivi?' selected':'')+'>'+o+'</option>'; }).join('')+'</select></td>';
+        return '<td'+(c[2]?' class="nb"':'')+'>'+c[1](r)+'</td>'; }).join('')+'</tr>'; }).join('')
+      : '<tr><td class="vide" colspan="'+cols.length+'">Aucune demande pour le moment. Elles apparaîtront ici dès qu’un visiteur utilisera le bouton « Réserver » du site.</td></tr>')+'</tbody>';
+    document.getElementById('maj').textContent = 'Mis à jour à ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+  }
+
+  function charger(){
+    return fetch('/api/equipe/reservations', {credentials:'same-origin'}).then(function(r){
+      if(r.status === 401){ bord.hidden = true; connexion.hidden = false; document.getElementById('mdp').focus(); return; }
+      if(!r.ok) throw new Error();
+      return r.json().then(function(j){ donnees = j; connexion.hidden = true; bord.hidden = false; rend(); });
+    }).catch(function(){ toast('Chargement impossible, vérifiez la connexion.'); });
+  }
+
+  connexion.addEventListener('submit', function(e){
+    e.preventDefault();
+    var msg = document.getElementById('message-connexion'); msg.hidden = true;
+    fetch('/api/equipe/connexion', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({mot_de_passe:document.getElementById('mdp').value})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.erreur); }); })
+      .then(function(){ document.getElementById('mdp').value = ''; charger(); })
+      .catch(function(err){ msg.textContent = err.message || 'Connexion impossible.'; msg.hidden = false; });
+  });
+  document.getElementById('sortir').addEventListener('click', function(){
+    fetch('/api/equipe/deconnexion', {method:'POST'}).then(function(){ donnees = null; bord.hidden = true; connexion.hidden = false; });
+  });
+  document.getElementById('onglets').addEventListener('click', function(e){
+    var b = e.target.closest('[data-onglet]'); if(b){ onglet = b.dataset.onglet; rend(); }
+  });
+  document.getElementById('table').addEventListener('change', function(e){
+    var s = e.target.closest('.etat'); if(!s) return;
+    fetch('/api/equipe/reservations/' + s.dataset.id, {method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({suivi:s.value})})
+      .then(function(r){ if(!r.ok) throw new Error(); donnees.reservations.forEach(function(x){ if(String(x.id) === s.dataset.id) x.suivi = s.value; }); toast('Suivi enregistré : ' + s.value); })
+      .catch(function(){ toast('Enregistrement impossible, réessayez.'); });
+  });
+  // Rafraîchit les chiffres toutes les 2 minutes quand la page est affichée
+  setInterval(function(){ if(donnees && !document.hidden) charger(); }, 120000);
+  charger();
+})();
+</script>
+</body>
+</html>

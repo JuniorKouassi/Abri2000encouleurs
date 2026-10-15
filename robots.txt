@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /equipe/
+Disallow: /api/
 
 Sitemap: https://abri2000encouleurs.kouassij019.workers.dev/sitemap.xml

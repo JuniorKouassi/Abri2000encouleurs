@@ -7,6 +7,18 @@
     "directory": ".",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/assets/video/*"]
+    "run_worker_first": ["/api/*", "/assets/video/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "abri2000-reservations",
+      "database_id": "2414de6c-35a4-4acb-88db-d40518b446c7",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "MAIL_EQUIPE": "infos.147event@gmail.com"
   }
+  // Secrets (npx wrangler secret put …) : MOT_DE_PASSE_EQUIPE, CLE_SESSION, RESEND_API_KEY (facultatif)
 }

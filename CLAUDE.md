@@ -25,6 +25,10 @@ Ne change pas la direction artistique. Le travail restant consiste à préparer 
 index.html              page complète (sections dans l'ordre ci-dessous)
 assets/css/style.css    tous les styles, tokens de couleur en haut du fichier
 assets/js/main.js       compte à rebours, filtres galerie, visionneuse photo, boutons « Copier »
+assets/js/reservation.js fenêtre « Réserver » (public, stand, partenaire)
+equipe/index.html       page privée de l'équipe (réservations), protégée par mot de passe
+src/                    Worker Cloudflare : API des réservations, page équipe, vidéos
+migrations/             schéma de la base D1 des réservations
 assets/img/             photos (jpg), logos (webp), nuages de poudre transparents (webp)
 reference/              documents sources du client : flyer, papier en-tête, PDF
 ```
@@ -92,7 +96,7 @@ Le compte à rebours vise le 25 décembre 2026 à 00:00, heure d'Abidjan (UTC+0)
 7. **Performance** :
    - précharger la police Lilita One et `hero-foule.jpg` ;
    - viser un score Lighthouse supérieur à 90 sur mobile.
-8. **Déploiement** : site statique, à héberger sur Vercel, Netlify ou un hébergement classique. Aucune base de données ni serveur requis.
+8. **Déploiement** : Worker Cloudflare `abri2000encouleurs` (fichiers statiques, plus une base D1 pour les réservations). Voir README.md.
 
 ## À ne pas faire
 
