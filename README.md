@@ -2,7 +2,7 @@
 
 Site d'une page du festival (25 et 26 décembre 2026, Cité Abri 2000, Koumassi).
 
-En ligne : https://abri2000encouleurs.kouassij019.workers.dev
+En ligne : https://abri2000encouleurs.org (aussi `www.` et l'adresse technique abri2000encouleurs.kouassij019.workers.dev)
 
 Les polices (Lilita One, Poppins, Kaushan Script) sont hébergées dans `assets/fonts/`, sans appel à Google Fonts.
 
@@ -24,9 +24,9 @@ Chaque photo `assets/img/nom.jpg` a des variantes `nom-400.avif`, `nom-400.webp`
 utilisées par les balises `<picture>` de `index.html`. Le JPEG reste en secours et sert à la visionneuse.
 En ajoutant une photo, générer les mêmes variantes et la même balise `<picture>`.
 
-## Quand le nom de domaine sera connu
+## Nom de domaine
 
-Remplacer `abri2000encouleurs.kouassij019.workers.dev` dans `index.html` (canonical, Open Graph, JSON-LD), `robots.txt` et `sitemap.xml`.
+`abri2000encouleurs.org` et `www.abri2000encouleurs.org` sont attachés au Worker dans `wrangler.jsonc` (`routes`). L'adresse complète `https://abri2000encouleurs.org` est écrite dans `index.html` (canonical, Open Graph, JSON-LD), `robots.txt`, `sitemap.xml` et `assets/js/reservation.js` (lien d'invitation WhatsApp).
 
 ## Vidéo de l'ouverture
 

@@ -108,6 +108,5 @@ Le compte à rebours vise le 25 décembre 2026 à 00:00, heure d'Abidjan (UTC+0)
 
 ## Points à confirmer avec le client
 
-- Nom de domaine final.
 - Logos des partenaires et sponsors confirmés, pour ajouter une rangée de logos dans la section Partenaires.
 - Orthographe exacte de « Sci Lagune » dans l'adresse.

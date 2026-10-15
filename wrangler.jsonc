@@ -3,6 +3,10 @@
   "name": "abri2000encouleurs",
   "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
+  "routes": [
+    { "pattern": "abri2000encouleurs.org", "custom_domain": true },
+    { "pattern": "www.abri2000encouleurs.org", "custom_domain": true }
+  ],
   "assets": {
     "directory": ".",
     "binding": "ASSETS",

@@ -5,7 +5,7 @@
   var corps = dlg.querySelector('.resa-corps'), suivant = dlg.querySelector('.resa-suivant'), retour = dlg.querySelector('.resa-retour'),
       etapes = dlg.querySelectorAll('.resa-etapes li'), titre = dlg.querySelector('.resa-titre'), secu = dlg.querySelector('.resa-securite'),
       erreur = dlg.querySelector('.resa-erreur');
-  var SITE = location.origin + '/';
+  var SITE = 'https://abri2000encouleurs.org/';
 
   var ICONES = {
     public:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14h36v7a4 4 0 0 0 0 8v7H6v-7a4 4 0 0 0 0-8z" fill="#fff" fill-opacity=".28"/><path d="M6 14h36v7a4 4 0 0 0 0 8v7H6v-7a4 4 0 0 0 0-8z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M31 14v22" stroke="#fff" stroke-width="2.2" stroke-dasharray="3 3"/><path d="M17 20l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#fff"/></svg>',

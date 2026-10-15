@@ -3,4 +3,4 @@ Allow: /
 Disallow: /equipe/
 Disallow: /api/
 
-Sitemap: https://abri2000encouleurs.kouassij019.workers.dev/sitemap.xml
+Sitemap: https://abri2000encouleurs.org/sitemap.xml
