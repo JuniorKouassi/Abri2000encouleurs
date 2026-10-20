@@ -44,3 +44,8 @@ Le bouton « Réserver » (barre du haut, ouverture, section Partenaires, pied d
 - Mail à l'équipe (info147event@gmail.com) à chaque demande, envoyé par Cloudflare Email Service depuis reservations@abri2000encouleurs.org (binding `EMAIL` dans `wrangler.jsonc`). L'adresse info147event@abri2000encouleurs.org est transférée vers ce Gmail par Email Routing.
 - Secrets Cloudflare : `MOT_DE_PASSE_EQUIPE`, `CLE_SESSION`, à définir avec `npx wrangler secret put NOM_DU_SECRET`. En local, les mettre dans `.dev.vars` (non versionné).
 - Nouvelle migration : `npx wrangler d1 migrations apply abri2000-reservations --remote`.
+
+## Partenaires
+
+La section « Ils nous soutiennent » (`#soutiens`, avant la section Partenaires) présente les logos en vedette tournante (`assets/js/partenaires.js`). Les logos convertis sont dans `assets/img/partenaires/` ; les fichiers d'origine sont dans `Partenaires/` (non publiés).
+Pour ajouter un partenaire : convertir son logo en `.webp` (640 px de large), puis copier une ligne `<li><button …>` dans `#pv-liste` de `index.html` en adaptant `data-nom`, `data-desc`, `data-niveau`, `data-w` et `data-h`. La zone « Devenir partenaire » ouvre la fenêtre de réservation sur le parcours Partenaire.

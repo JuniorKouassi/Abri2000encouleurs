@@ -54,7 +54,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="assets/css/style.css?v=20261018">
+<link rel="stylesheet" href="assets/css/style.css?v=20261020">
 </head>
 <body>
 <nav class="nav" aria-label="Navigation principale">
@@ -296,6 +296,41 @@
   </div>
 </section>
 
+<!-- ================= ILS NOUS SOUTIENNENT ================= -->
+<section class="bloc pv" id="soutiens" aria-labelledby="pv-titre">
+  <div class="poudre p-violet" style="--t:380px;left:-200px;top:-120px;--o:.35"></div>
+  <div class="poudre p-vert" style="--t:360px;right:-190px;bottom:-150px;--o:.4"></div>
+  <div class="enveloppe">
+    <div class="entete">
+      <span class="surtitre">Ils nous soutiennent</span>
+      <h2 id="pv-titre">Ils font vivre le festival</h2>
+      <p>Institutions, entreprises et acteurs de Koumassi s’engagent aux côtés de la jeunesse de la cité.</p>
+    </div>
+    <div class="pv-grille">
+      <div class="pv-scene" id="pv-scene">
+        <span class="pv-niveau" id="pv-niveau">Institution partenaire</span>
+        <div class="pv-grand"><img id="pv-logo" src="assets/img/partenaires/culture.webp" alt="Logo Ministère de la Culture et de la Francophonie" width="640" height="581"></div>
+        <div><h3 id="pv-nom">Ministère de la Culture et de la Francophonie</h3><p class="pv-desc" id="pv-desc">République de Côte d’Ivoire. Union, Discipline, Travail.</p></div>
+        <div class="pv-commandes" hidden>
+          <button type="button" id="pv-prec" aria-label="Partenaire précédent">‹</button>
+          <button type="button" id="pv-suiv" aria-label="Partenaire suivant">›</button>
+          <button type="button" id="pv-pause" aria-label="Mettre en pause">❚❚</button>
+        </div>
+        <div class="pv-avance" aria-hidden="true"><i id="pv-barre"></i></div>
+      </div>
+      <ul class="pv-liste" id="pv-liste">
+        <li><button type="button" data-niveau="Institution partenaire" data-nom="Ministère de la Culture et de la Francophonie" data-desc="République de Côte d’Ivoire. Union, Discipline, Travail." data-w="640" data-h="581" aria-label="Ministère de la Culture et de la Francophonie" aria-current="true"><img src="assets/img/partenaires/culture.webp" alt="" width="640" height="581"></button></li>
+        <li><button type="button" data-niveau="Institution partenaire" data-nom="Mairie de Koumassi" data-desc="Mari semper altior : toujours plus haut." data-w="640" data-h="640" aria-label="Mairie de Koumassi"><img src="assets/img/partenaires/mairie.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" data-niveau="Partenaire du festival" data-nom="SEDAFCI" data-desc="Société d’Énergie Durable d’Automatisme, Froid et Climatisation Industrielle." data-w="640" data-h="640" aria-label="SEDAFCI"><img src="assets/img/partenaires/sedafci.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" data-niveau="Partenaire du festival" data-nom="AGTL, Africa Global Transit &amp; Logistics" data-desc="Import, export, dédouanement, groupage de colis, fret maritime et aérien." data-w="640" data-h="287" aria-label="AGTL, Africa Global Transit et Logistics"><img src="assets/img/partenaires/agtl.webp" alt="" width="640" height="287" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" data-niveau="Partenaire du festival" data-nom="Gaabo Fabrik" data-desc="Le naturel au service du bien-être." data-w="640" data-h="320" aria-label="Gaabo Fabrik"><img src="assets/img/partenaires/gaabo.webp" alt="" width="640" height="320" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" data-niveau="Partenaire du festival" data-nom="Dooya" data-desc="L’expert ivoirien de la literie." data-w="640" data-h="640" aria-label="Dooya"><img src="assets/img/partenaires/dooya.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></button></li>
+        <li class="pv-vous-li"><a class="pv-vous" href="#reserver" data-reserver="partenaire"><span class="pv-vous-script">Votre logo ici</span><b>Devenir partenaire</b><span class="pv-vous-fleche" aria-hidden="true">›</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PARTENAIRES ================= -->
 <section class="bloc partenaires" id="partenaires">
   <div class="poudre p-orange" style="--t:460px;left:-240px;top:-80px;--o:.5"></div>
@@ -393,7 +428,8 @@
   </div>
 </dialog>
 <div class="toast" id="toast" hidden></div>
-<script src="assets/js/main.js?v=20261018"></script>
+<script src="assets/js/main.js?v=20261020"></script>
 <script src="assets/js/reservation.js?v=20261018"></script>
+<script src="assets/js/partenaires.js?v=20261020"></script>
 </body>
 </html>
