@@ -9,6 +9,17 @@
   var DUREE = 4500, courant = 0, pause = window.matchMedia('(prefers-reduced-motion: reduce)').matches, survol = false, t0 = performance.now(), visible = true;
   commandes.hidden = false;
 
+  // Fige la hauteur du panneau sur la plus grande fiche, pour que la page ne saute pas à chaque changement
+  function fige(){
+    var sauve = {n: nom.textContent, d: desc.textContent, v: niveau.textContent}, max = 0;
+    scene.style.minHeight = '';
+    boutons.forEach(function(b){ nom.textContent = b.dataset.nom; desc.textContent = b.dataset.desc; niveau.textContent = b.dataset.niveau; max = Math.max(max, scene.offsetHeight); });
+    nom.textContent = sauve.n; desc.textContent = sauve.d; niveau.textContent = sauve.v;
+    scene.style.minHeight = max + 'px';
+  }
+  var tFige; window.addEventListener('resize', function(){ clearTimeout(tFige); tFige = setTimeout(fige, 150); });
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fige); } else { fige(); }
+
   function montre(k){
     courant = (k + boutons.length) % boutons.length; t0 = performance.now();
     var b = boutons[courant], img = b.querySelector('img');
