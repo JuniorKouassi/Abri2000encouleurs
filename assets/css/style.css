@@ -538,3 +538,11 @@ html.resa-ouverte{overflow:hidden}
   .glisse-piste i{position:absolute;top:0;left:0;height:100%;width:30%;border-radius:5px;background:linear-gradient(90deg,var(--orange),var(--rose))}
   .glisse span{font-size:.78rem;font-weight:600;color:var(--encre-douce);letter-spacing:.04em;white-space:nowrap}
 }
+
+/* galerie : défilement sur le côté sur téléphone, photos à hauteur égale et sans recadrage */
+@media (max-width:760px){
+  .mur{columns:auto;display:flex;align-items:flex-start;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gouttiere);margin-inline:calc(var(--gouttiere) * -1);padding:6px var(--gouttiere) 18px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .mur::-webkit-scrollbar{display:none}
+  .mur figure{flex:0 0 auto;margin:0;scroll-snap-align:start}
+  .mur img{height:250px;width:auto;max-width:none}
+}

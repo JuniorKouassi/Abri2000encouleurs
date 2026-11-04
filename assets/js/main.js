@@ -17,18 +17,20 @@
   var vid = document.querySelector('.video-tirage');
   if(vid && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ vid.removeAttribute('autoplay'); vid.pause(); }
 
-  // Activités : barre de progression du défilement sur le côté (téléphone)
-  var grilleAct = document.querySelector('.grille-activites'), pisteAct = document.querySelector('.glisse-piste i');
-  if(grilleAct && pisteAct){
-    var majGlisse = function(){
-      var tot = grilleAct.scrollWidth, vis = grilleAct.clientWidth, w = Math.min(100, vis / tot * 100);
-      var r = tot > vis ? grilleAct.scrollLeft / (tot - vis) : 0;
-      pisteAct.style.width = w + '%'; pisteAct.style.left = (r * (100 - w)) + '%';
+  // Défilements sur le côté (activités, galerie) : barre de progression sous chaque bande
+  var barres = Array.prototype.map.call(document.querySelectorAll('.glisse'), function(g){
+    var bande = g.previousElementSibling, i = g.querySelector('i');
+    var maj = function(){
+      var tot = bande.scrollWidth, vis = bande.clientWidth, w = Math.min(100, vis / tot * 100);
+      var r = tot > vis ? bande.scrollLeft / (tot - vis) : 0;
+      i.style.width = w + '%'; i.style.left = (r * (100 - w)) + '%';
     };
-    grilleAct.addEventListener('scroll', majGlisse, {passive:true});
-    window.addEventListener('resize', majGlisse);
-    majGlisse();
-  }
+    bande.addEventListener('scroll', maj, {passive:true});
+    maj(); return {bande: bande, maj: maj};
+  });
+  function majBarres(){ barres.forEach(function(x){ x.maj(); }); }
+  window.addEventListener('resize', majBarres);
+  window.addEventListener('load', majBarres);
 
   // Menu hamburger
   var burger = document.getElementById('menu-burger'), menu = document.getElementById('menu-mobile');
@@ -52,6 +54,8 @@
       boutons.forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true' : 'false'); });
       var f = b.dataset.f;
       photos.forEach(function(p){ p.hidden = !(f==='tout' || p.dataset.c===f); });
+      var murEl = document.getElementById('mur'); if(murEl) murEl.scrollLeft = 0;
+      if(typeof majBarres === 'function') majBarres();
     });
   });
 
