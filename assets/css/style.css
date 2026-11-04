@@ -526,3 +526,15 @@ html.resa-ouverte{overflow:hidden}
 .px-sceau{width:9.6cqw;height:9.6cqw;border-radius:50%;display:grid;place-items:center;text-align:center;color:#fff;font-family:var(--display);font-size:1.5cqw;line-height:1.05;background:radial-gradient(circle at 35% 30%,#FFE9A8,#D9A21B 55%,#9C6B00);box-shadow:0 0 0 .5cqw #fff,0 0 0 .8cqw #D9A21B,0 1cqw 2cqw -1cqw rgba(0,0,0,.4)}
 .px-sceau span{display:block;color:var(--violet-nuit)}
 @media (max-width:900px){.px-dip{width:min(100%,420px);transform:rotate(1.6deg)}}
+
+/* activités : défilement sur le côté sur téléphone */
+.glisse{display:none}
+@media (max-width:760px){
+  .grille-activites{display:flex;grid-template-columns:none;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gouttiere);margin-inline:calc(var(--gouttiere) * -1);padding:6px var(--gouttiere) 18px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .grille-activites::-webkit-scrollbar{display:none}
+  .grille-activites .activite{flex:0 0 min(78%,300px);scroll-snap-align:start}
+  .glisse{position:relative;z-index:2;display:flex;align-items:center;gap:12px;margin-top:2px}
+  .glisse-piste{position:relative;flex:1;height:5px;border-radius:5px;background:var(--trait);overflow:hidden}
+  .glisse-piste i{position:absolute;top:0;left:0;height:100%;width:30%;border-radius:5px;background:linear-gradient(90deg,var(--orange),var(--rose))}
+  .glisse span{font-size:.78rem;font-weight:600;color:var(--encre-douce);letter-spacing:.04em;white-space:nowrap}
+}

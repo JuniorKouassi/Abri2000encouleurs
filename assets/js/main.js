@@ -17,6 +17,19 @@
   var vid = document.querySelector('.video-tirage');
   if(vid && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ vid.removeAttribute('autoplay'); vid.pause(); }
 
+  // Activités : barre de progression du défilement sur le côté (téléphone)
+  var grilleAct = document.querySelector('.grille-activites'), pisteAct = document.querySelector('.glisse-piste i');
+  if(grilleAct && pisteAct){
+    var majGlisse = function(){
+      var tot = grilleAct.scrollWidth, vis = grilleAct.clientWidth, w = Math.min(100, vis / tot * 100);
+      var r = tot > vis ? grilleAct.scrollLeft / (tot - vis) : 0;
+      pisteAct.style.width = w + '%'; pisteAct.style.left = (r * (100 - w)) + '%';
+    };
+    grilleAct.addEventListener('scroll', majGlisse, {passive:true});
+    window.addEventListener('resize', majGlisse);
+    majGlisse();
+  }
+
   // Menu hamburger
   var burger = document.getElementById('menu-burger'), menu = document.getElementById('menu-mobile');
   if(burger && menu){
