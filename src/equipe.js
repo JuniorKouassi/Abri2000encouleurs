@@ -58,7 +58,8 @@ export async function routeEquipe(request, env, chemin) {
           COALESCE(SUM(CASE WHEN type = 'public' AND jours IN ('Vendredi 25', 'Les deux jours') THEN places END), 0) AS vendredi,
           COALESCE(SUM(CASE WHEN type = 'public' AND jours IN ('Samedi 26', 'Les deux jours') THEN places END), 0) AS samedi,
           COUNT(CASE WHEN type = 'stand' THEN 1 END) AS stands,
-          COUNT(CASE WHEN type = 'partenaire' THEN 1 END) AS partenaires
+          COUNT(CASE WHEN type = 'partenaire' THEN 1 END) AS partenaires,
+          COUNT(CASE WHEN type = 'candidature' THEN 1 END) AS candidatures
         FROM reservations`).first(),
     ]);
     return json({ totaux, reservations: results.map((r) => ({ ...r, details: JSON.parse(r.details) })) });
@@ -77,14 +78,15 @@ export async function routeEquipe(request, env, chemin) {
     const { results } = await env.DB.prepare('SELECT * FROM reservations ORDER BY type, cree_le').all();
     const date = (iso) => new Date(iso).toLocaleString('fr-FR', { timeZone: 'Africa/Abidjan', dateStyle: 'short', timeStyle: 'short' });
     const cellule = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
-    const types = { public: 'Public', stand: 'Stand', partenaire: 'Partenaire' };
+    const types = { public: 'Public', stand: 'Stand', partenaire: 'Partenaire', candidature: 'Candidature au Prix' };
     const entete = ['N°', 'Reçue le', 'Type', 'Nom', 'Sexe', 'WhatsApp', 'E-mail', 'Jours', 'Places', 'Connu par',
-      'Stand', 'Pour', 'Articles', 'Catégorie', 'Électricité', 'Structure', 'Fonction', 'Partenariat', 'Proposition', 'Suivi'];
+      'Stand', 'Pour', 'Articles', 'Catégorie', 'Électricité', 'Structure', 'Fonction', 'Partenariat', 'Proposition', 'Candidat', 'Activité', 'Ancienneté', 'À récompenser', 'Lien', 'Suivi'];
     const rangees = results.map((r) => {
       const d = JSON.parse(r.details);
       const l = (x) => (x || []).join(', ');
       return [r.id, date(r.cree_le), types[r.type], r.nom, r.sexe, '+225 ' + r.tel, r.email, r.jours, r.type === 'public' ? r.places : '',
-        l(d.source), d.enseigne, d.but, d.articles, l(d.categories), d.courant, d.structure, d.fonction, l(d.nature), d.message, r.suivi];
+        l(d.source), d.enseigne, d.but, d.articles, l(d.categories), d.courant, d.structure, d.fonction, l(d.nature), d.message,
+        d.pour === 'Moi-même' ? 'Le déposant lui-même' : d.candidat, d.activite, d.anciennete, d.reussite, d.lien, r.suivi];
     });
     // Séparateur « ; » et BOM UTF-8 : Excel en français ouvre le fichier directement, accents compris
     const csv = '﻿' + [entete, ...rangees].map((l) => l.map(cellule).join(';')).join('\r\n');

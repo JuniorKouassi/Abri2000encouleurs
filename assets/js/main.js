@@ -28,7 +28,7 @@
     menu.addEventListener('click', function(e){ if(e.target.closest('a')) ferme(); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !menu.hidden){ ferme(); burger.focus(); } });
     document.addEventListener('click', function(e){ if(!menu.hidden && !e.target.closest('.nav')) ferme(); });
-    window.matchMedia('(min-width: 901px)').addEventListener('change', function(e){ if(e.matches) ferme(); });
+    window.matchMedia('(min-width: 961px)').addEventListener('change', function(e){ if(e.matches) ferme(); });
   }
 
   // Filtres de la galerie

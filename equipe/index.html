@@ -18,7 +18,7 @@ body{background:var(--voile)}
 .eq-titre span{font-size:.82rem;color:var(--encre-douce)}
 .eq-barre .bouton{padding:9px 18px;font-size:.88rem}
 .eq-sortir{border:0;background:none;font:inherit;font-weight:600;color:var(--encre-douce);cursor:pointer;padding:9px 6px}
-.tuiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tuiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .tuile-chiffre{border-radius:16px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));display:grid;gap:2px;box-shadow:0 16px 34px -22px rgba(42,14,87,.7)}
 .tuile-chiffre b{font-family:var(--display);font-weight:400;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
 .tuile-chiffre span{font-size:.82rem;font-weight:600}
@@ -79,7 +79,7 @@ tr:hover td{background:var(--voile)}
 (function(){
   var connexion = document.getElementById('connexion'), bord = document.getElementById('tableau-bord'), donnees = null, onglet = 'public';
   var SUIVIS = ['Nouveau','Rappelé','Validé','Refusé'];
-  var ONGLETS = {public:'Public', stand:'Stands', partenaire:'Partenaires'};
+  var ONGLETS = {public:'Public', stand:'Stands', partenaire:'Partenaires', candidature:'Candidatures'};
   function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function date(iso){ return new Date(iso).toLocaleString('fr-FR', {timeZone:'Africa/Abidjan', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}); }
   function wa(tel){ return '<a href="https://wa.me/225'+esc(tel)+'" target="_blank" rel="noopener">+225 '+esc(tel.replace(/(\d{2})(?=\d)/g, '$1 '))+'</a>'; }
@@ -89,6 +89,7 @@ tr:hover td{background:var(--voile)}
   var COLONNES = {
     public:[['Reçue le',function(r){return date(r.cree_le)}],['Nom',function(r){return esc(r.nom)}],['Sexe',function(r){return r.sexe}],['WhatsApp',function(r){return wa(r.tel)}],['Jour',function(r){return r.jours}],['Places',function(r){return r.places},'nb'],['Connu par',function(r){return esc(r.details.source.join(', '))}]],
     stand:[['Reçue le',function(r){return date(r.cree_le)}],['Nom',function(r){return esc(r.nom)}],['WhatsApp',function(r){return wa(r.tel)}],['Stand',function(r){return esc(r.details.enseigne)}],['Pour',function(r){return r.details.but}],['Articles',function(r){return esc(r.details.articles)+(r.details.categories.length?'<br><small>'+esc(r.details.categories.join(', '))+'</small>':'')}],['Jours',function(r){return r.jours}],['Électricité',function(r){return r.details.courant}],['Suivi',null]],
+    candidature:[['Reçue le',function(r){return date(r.cree_le)}],['Déposant',function(r){return esc(r.nom)+(r.email?'<br><small>'+esc(r.email)+'</small>':'')}],['WhatsApp',function(r){return wa(r.tel)}],['Candidat',function(r){return r.details.pour==='Moi-même'?'<i>Le déposant</i>':esc(r.details.candidat)}],['Activité',function(r){return esc(r.details.activite)+'<br><small>'+esc(r.details.anciennete)+(r.details.lien?' · '+esc(r.details.lien):'')+'</small>'}],['À récompenser',function(r){return esc(r.details.reussite)}],['Suivi',null]],
     partenaire:[['Reçue le',function(r){return date(r.cree_le)}],['Nom',function(r){return esc(r.nom)+(r.email?'<br><small>'+esc(r.email)+'</small>':'')}],['WhatsApp',function(r){return wa(r.tel)}],['Structure',function(r){return esc(r.details.structure)+(r.details.fonction?'<br><small>'+esc(r.details.fonction)+'</small>':'')}],['Partenariat',function(r){return esc(r.details.nature.join(', '))}],['Proposition',function(r){return esc(r.details.message)}],['Suivi',null]]
   };
 
@@ -98,7 +99,8 @@ tr:hover td{background:var(--voile)}
       [tt.vendredi,'personnes attendues le vendredi 25','var(--orange)','var(--rose)'],
       [tt.samedi,'personnes attendues le samedi 26','var(--violet)','var(--rose)'],
       [tt.stands,'demandes de stand','#4E9A2A','var(--bleu)'],
-      [tt.partenaires,'propositions de partenariat','var(--bleu)','var(--violet)']
+      [tt.partenaires,'propositions de partenariat','var(--bleu)','var(--violet)'],
+      [tt.candidatures,'candidatures au Prix','#B8860B','var(--orange)']
     ].map(function(x){ return '<div class="tuile-chiffre" style="--c1:'+x[2]+';--c2:'+x[3]+'"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'; }).join('');
     document.getElementById('onglets').innerHTML = Object.keys(ONGLETS).map(function(k){
       return '<button type="button" role="tab" data-onglet="'+k+'" aria-selected="'+(k===onglet)+'">'+ONGLETS[k]+'<small>'+l.filter(function(r){return r.type===k}).length+'</small></button>'; }).join('');

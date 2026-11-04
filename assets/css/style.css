@@ -62,7 +62,7 @@ p{margin:0}
 .b-chaud{color:#fff;background:linear-gradient(100deg,var(--orange),var(--rose));box-shadow:0 8px 22px -8px rgba(233,30,120,.65)}
 .b-clair{color:var(--violet-profond);background:#fff;box-shadow:inset 0 0 0 2px var(--violet)}
 .nav .bouton{padding:10px 18px;font-size:.85rem}
-@media (max-width:900px){.liens{display:none}.nav .bouton{margin-left:auto}}
+@media (max-width:960px){.liens{display:none}.nav .bouton{margin-left:auto}}
 .nav .bouton{white-space:nowrap}
 @media (max-width:480px){.marque small{display:none}.marque span{font-size:.98rem}.marque img{width:38px;height:38px}.nav .bouton{padding:8px 13px;font-size:.78rem}}
 
@@ -393,11 +393,11 @@ html.resa-ouverte{overflow:hidden}
 .menu-mobile a:last-child{border-bottom:0}
 .menu-mobile a:hover,.menu-mobile a:focus-visible{color:var(--violet)}
 @keyframes menu-entre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-@media (max-width:900px){
+@media (max-width:960px){
   .menu-burger{display:block}
   .nav .enveloppe{gap:10px}
 }
-@media (min-width:901px){.menu-mobile{display:none}}
+@media (min-width:961px){.menu-mobile{display:none}}
 @media (max-width:380px){
   .marque span{font-size:.86rem}
   .marque img{width:34px;height:34px}
@@ -461,3 +461,41 @@ html.resa-ouverte{overflow:hidden}
   .pv-grand{animation:none}
   .pv-liste button,.pv-vous{transition:none}
 }
+
+/* ================= PRIX DU MEILLEUR ENTREPRENEUR ================= */
+.px{background:var(--violet-nuit);color:#fff}
+.px .enveloppe{position:relative;z-index:2}
+.px-grille{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,56px);align-items:center}
+.px-nouveau{display:inline-flex;gap:10px;align-items:center;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#FFE08A}
+.px-nouveau::before{content:"";width:30px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--orange),var(--jaune),var(--vert))}
+.px h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-top:12px;color:#fff}
+.px h2 em{font-style:normal;color:#FFE08A}
+.px-accroche{margin-top:16px;color:rgba(255,255,255,.9);max-width:54ch}
+.px-piliers{display:grid;gap:14px;margin:24px 0 0;padding:0;list-style:none}
+.px-piliers li{display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:start}
+.px-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22)}
+.px-ic svg{width:25px;height:25px}
+.px-piliers b{display:block;font-size:1.02rem}
+.px-piliers span{display:block;color:rgba(255,255,255,.8);font-size:.92rem}
+.px-criteres{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.px-criteres li{font-size:.86rem;font-weight:600;border-radius:999px;padding:6px 15px;background:rgba(255,224,138,.14);border:1px solid rgba(255,224,138,.45);color:#FFE08A}
+.px-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.px .px-b-or{color:var(--violet-nuit);background:linear-gradient(100deg,#FFE9A8,#D9A21B);box-shadow:0 10px 26px -12px rgba(217,162,27,.9)}
+.px .px-b-contour{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);box-shadow:none}
+.px .px-b-contour:hover{background:rgba(255,255,255,.1)}
+.px-troph{position:relative;display:grid;place-items:center;min-height:340px}
+.px-halo{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,224,138,.5),rgba(255,224,138,0) 70%)}
+.px-troph svg{position:relative;width:min(100%,290px);height:auto;filter:drop-shadow(0 26px 32px rgba(0,0,0,.5))}
+.px-etapes{margin:clamp(36px,5vw,56px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.px-etapes li{border-top:3px solid #D9A21B;padding-top:12px}
+.px-etapes small{display:block;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#FFE08A}
+.px-etapes b{display:block;margin-top:2px}
+.px-etapes span{display:block;font-size:.88rem;color:rgba(255,255,255,.78);margin-top:2px}
+@media (max-width:900px){
+  .px-grille{grid-template-columns:1fr}
+  .px-troph{order:-1;min-height:280px}
+  .px-halo{width:280px;height:280px}
+  .px-troph svg{width:min(100%,220px)}
+  .px-etapes{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:480px){.px-cta .bouton{width:100%;justify-content:center}}

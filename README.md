@@ -49,3 +49,9 @@ Le bouton « Réserver » (barre du haut, ouverture, section Partenaires, pied d
 
 La section « Ils nous soutiennent » (`#soutiens`, avant la section Partenaires) présente les logos en vedette tournante (`assets/js/partenaires.js`). Les logos convertis sont dans `assets/img/partenaires/` ; les fichiers d'origine sont dans `Partenaires/` (non publiés).
 Pour ajouter un partenaire : convertir son logo en `.webp` (640 px de large), puis copier une ligne `<li><button …>` dans `#pv-liste` de `index.html` en adaptant `data-nom`, `data-desc`, `data-niveau`, `data-w` et `data-h`. La zone « Devenir partenaire » ouvre la fenêtre de réservation sur le parcours Partenaire.
+
+## Prix du Meilleur Entrepreneur
+
+La section `#prix` (entre Programme et En images) présente le prix. Ses boutons « Candidater » et « Proposer un entrepreneur » ouvrent la fenêtre de réservation sur le parcours `candidature` (`assets/js/reservation.js`).
+Les candidatures sont enregistrées comme les autres demandes (type `candidature`, migration `migrations/0002_candidatures.sql`), envoyées par mail à l'équipe, et visibles dans l'onglet « Candidatures » de `/equipe/` et dans l'export Excel.
+Les dates, le jury et le mode de choix du lauréat ne sont pas écrits sur le site tant qu'ils ne sont pas décidés.

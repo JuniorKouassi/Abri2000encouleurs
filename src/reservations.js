@@ -6,7 +6,8 @@ const BUTS = ['Vendre', 'Exposer', 'Vendre et exposer'];
 const CATEGORIES = ['Plats et grillades', 'Boissons', 'Pâtisserie', 'Vêtements et pagnes', 'Cosmétiques', 'Accessoires', 'Artisanat et art', 'Autre'];
 const NATURES = ['Financier', 'Matériel', 'Logistique', 'Médias', 'Autre'];
 export const SUIVIS = ['Nouveau', 'Rappelé', 'Validé', 'Refusé'];
-const TITRES = { public: 'Place dans le public', stand: 'Stand', partenaire: 'Partenariat' };
+const ANCIENNETES = ['Moins d’1 an', '1 à 3 ans', '3 à 5 ans', 'Plus de 5 ans'];
+const TITRES = { public: 'Place dans le public', stand: 'Stand', partenaire: 'Partenariat', candidature: 'Candidature au Prix du Meilleur Entrepreneur' };
 
 class ErreurSaisie extends Error {}
 
@@ -58,6 +59,16 @@ export function valider(c) {
       categories: plusieurs(c.categories, CATEGORIES, 'catégorie'),
       courant: parmi(c.courant, ['Oui', 'Non'], 'électricité'),
     };
+  } else if (type === 'candidature') {
+    const pour = parmi(c.pour, ['Moi-même', 'Une autre personne'], 'qui présentez-vous');
+    r.details = {
+      pour,
+      candidat: pour === 'Moi-même' ? '' : texte(c.candidat, 'nom du candidat', { min: 2, max: 80 }),
+      activite: texte(c.activite, 'entreprise ou activité', { max: 100 }),
+      anciennete: parmi(c.anciennete, ANCIENNETES, 'ancienneté'),
+      reussite: texte(c.reussite, 'ce qui mérite d’être récompensé', { min: 20, max: 1000 }),
+      lien: texte(c.lien, 'lien', { max: 200, facultatif: true }),
+    };
   } else {
     r.details = {
       structure: texte(c.structure, 'entreprise ou structure', { max: 100 }),
@@ -96,6 +107,7 @@ export function lignes(r) {
   if (r.email) l.push(['E-mail', r.email]);
   if (r.type === 'public') l.push(['Jour', r.jours], ['Places', String(r.places)], ['Connu par', d.source.join(', ')]);
   if (r.type === 'stand') l.push(['Stand', d.enseigne], ['Pour', d.but], ['Articles', d.articles], ['Catégorie', d.categories.join(', ')], ['Jours', r.jours], ['Électricité', d.courant]);
+  if (r.type === 'candidature') l.push(['Candidat', d.pour === 'Moi-même' ? 'Le déposant lui-même' : d.candidat], ['Activité', d.activite], ['Ancienneté', d.anciennete], ['À récompenser', d.reussite], ['Lien', d.lien]);
   if (r.type === 'partenaire') l.push(['Structure', d.structure], ['Fonction', d.fonction], ['Partenariat', d.nature.join(', ')], ['Proposition', d.message]);
   return l.filter((x) => x[1]);
 }
@@ -105,7 +117,7 @@ const echapper = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<'
 async function envoyerMail(env, r) {
   if (!env.EMAIL || !env.MAIL_EQUIPE) return;
   const l = lignes(r);
-  const sujet = `Réservation : ${TITRES[r.type]}, ${r.nom}` + (r.type === 'public' ? ` (${r.places} place${r.places > 1 ? 's' : ''})` : '');
+  const sujet = `${r.type === 'candidature' ? 'Candidature' : 'Réservation'} : ${TITRES[r.type]}, ${r.nom}` + (r.type === 'public' ? ` (${r.places} place${r.places > 1 ? 's' : ''})` : '');
   const html = `<h2 style="font-family:Arial,sans-serif;color:#43197F">Nouvelle demande sur le site du festival</h2>
 <table style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">${l.map(([k, v]) =>
     `<tr><td style="padding:6px 14px 6px 0;color:#5B4D72">${echapper(k)}</td><td style="padding:6px 0;font-weight:bold">${echapper(v)}</td></tr>`).join('')}</table>
